@@ -2,7 +2,7 @@
 
 ## Projects for Term 1
 
-### Candyland Game (created new theme to be a candyland theme instead of a space theme)
+### Candyland Game 10/22/25 (created new theme to be a candyland theme instead of a space theme)
 
 This is a fun Candyland-themed game based on a space game. You control a cookie/ice cream spaceship flying through the sky full of sweets like cottton candy, lollipops, and candy apples.
 
