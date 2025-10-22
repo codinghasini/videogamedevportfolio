@@ -2,9 +2,12 @@
 
 ## Projects for Term 1
 
-Candyland Game (created new theme to be a candyland theme instead of a space theme)
+###Candyland Game (created new theme to be a candyland theme instead of a space theme)
 
-!(https://github.com/codinghasini/videogamedevportfolio/tree/main/src/SpaceGame)
+![]()
 
-macOS[]
-Windows[]
+![Running Game](https://github.com/codinghasini/videogamedevportfolio/tree/main/src/SpaceGame)
+
+* macOS[]
+* Windows[]
+* [Source Code] ()
