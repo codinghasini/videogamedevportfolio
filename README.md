@@ -18,7 +18,5 @@ You can collect power-ups like ammo boost or a health boosts to help you survive
 
 
 * [macOS](https://github.com/user-attachments/files/23057028/macos-aarch64.zip)
-
-
-* Windows[]
+* [Windows](https://github.com/user-attachments/files/23057069/windows-amd64.zip)
 * [Source Code] (https://github.com/codinghasini/videogamedevportfolio/tree/main/src/SpaceGame)
