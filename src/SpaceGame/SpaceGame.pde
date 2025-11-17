@@ -1,190 +1,222 @@
-// Kirubashini S | September 17th 2025 | SpaceGame
-ArrayList<Rock> candy = new ArrayList<Rock>();
-ArrayList<Laser> lasers = new ArrayList<Laser>();
-ArrayList<Star> stars = new ArrayList<Star>();
-ArrayList<Powerup> powups = new ArrayList<Powerup>();
-SpaceShip cookie;
-int score, rockspassed, level, rtime;
-Timer chipTimer, puTimer;
+//Bailey,Adeline,Kirubashinilakshana|Nov,5|
+Player edgar;
+char screen = 's';
+//game over, a = app stats
+Button btnStart, btnMenu, btnSettings, btnBack;
+int level;
+int score;
+int ghostsHit = 0;
+ArrayList<Ghost> ghosts;
+ArrayList<Coin> coins;
+ArrayList<Wall> walls;
+ArrayList<Spear> spears;
 PImage start;
-PImage gameover;
 boolean play;
-import processing.sound.*;
-SoundFile sparkle;
+
 
 
 
 void setup() {
-  size (650, 650);
+  size(1200, 700);
   background(20);
-  cookie = new SpaceShip();
-  level = 1;
+  start = loadImage("start.png"); 
+  level=1;
   score = 0;
-  rockspassed =0;
-  rtime = 1000;
-  //Timer info
-  chipTimer = new Timer(rtime);
-  puTimer = new Timer(2000);
-  puTimer.start();
-  chipTimer.start();
-  play = false;
-  start = loadImage("start.png");
-  gameover = loadImage("gameover.png");
-  sparkle = new SoundFile(this, "sparkle.wav");
+  edgar = new Player();
+  btnStart = new Button("Start",390, 315, 395, 140);
 
+  ghosts = new ArrayList<Ghost>();
+  coins = new ArrayList<Coin>();
+  walls = new ArrayList<Wall>();
+  spears= new ArrayList <Spear>();
 
-  //image info
+  for (int i = 0; i < 5; i++) {
+    coins.add(new Coin());
+  }
+  for (int i = 0; i < 3; i++) {
+    ghosts.add(new Ghost());
+  }
+
+  walls.add(new Wall(100, 100, 600, 20));   // top horizontal wall
+  walls.add(new Wall(100, 200, 20, 400));   // left vertical wall
+  walls.add(new Wall(680, 200, 20, 400));   // right vertical wall
+  walls.add(new Wall(200, 580, 500, 20));   // bottom horizontal wall
+  walls.add(new Wall(300, 300, 200, 20));   // middle section
 }
 
-void draw () {
+
+
+void draw() {
   if (!play) {
     startScreen();
-  } else {
-    
-    background(#8bd5f6);
-    
-    if (frameCount % 1000 == 0) {
-      level++;
-      //chipTimer.totalTime -= 50;
-      rtime-= 200;
-    }
+    return;
+  }
 
-
-    if (puTimer.isFinished()) {
-      powups.add(new Powerup());
-      puTimer.start();
-    }
-    for (int i = 0; i < powups.size(); i ++) {
-      Powerup pu = powups.get(i);
-      pu.display();
-      pu.move();
-      if (pu.intersect(cookie) && pu.type =='h') {
-        powups.remove(pu);
-        cookie.health += 100;
-      } else if (pu.intersect(cookie) && pu.type =='a') {
-        cookie.ammo += 100;
-        powups.remove(pu);
-        if (pu.reachedBottom()) {
-          powups.remove(pu);
-        }
-      }
-    }
-
-
-    stars.add(new Star());
-    for (int i=0; i<stars.size(); i++) {
-      Star s = stars.get(i);
-      s.display();
-      s.move();
-      if (s.reachedBottom()) {
-        stars.remove(s);
-      }
-    }
-
-    // Distributes rock on timer
-    if (chipTimer.isFinished()) {
-      candy.add(new Rock());
-      chipTimer.totalTime = rtime;
-      chipTimer.start();
-    }
-
-
-    for (int i = 0; i < candy.size(); i++) {
-      Rock rock = candy.get(i);
-      rock.move();
-      rock.display();
-
-      if (cookie.intersect(rock)) {
-        candy.remove(rock);
-        score+= 5;
-        cookie.health-= 5;
-      }
-
-      if (rock.reachedBottom()) {
-        candy.remove(rock);
-        i--;
-      }
-      println(candy.size());
-    }
-    
-
-    // Display and move lasers
-    for (int i = 0; i < lasers.size(); i++) {
-      Laser laser = lasers.get(i);
-      for (int j = 0; j < candy.size(); j++) {
-        Rock rock = candy.get(j);
-        if (laser.intersect(rock)) {
-          rock.diam -= 10;
-          if (rock.diam <5) {
-            candy.remove(rock);
-          }
-          score += 5;
-          lasers.remove(laser);
-        }
-      }
-      laser.display();
-      laser.move();
-    }
-
-    cookie.display();
+    background(20);
     infoPanel();
-    cookie.move(mouseX, mouseY);
-    
-    
-    if (cookie.health<1){
-      gameOver();
+    edgar.display();
+
+
+
+
+    for (int i = 0; i < walls.size(); i++) {
+      walls.get(i).display();
     }
-    if (cookie.ammo<1){
-      gameOver();
+
+    for (int i = coins.size() - 1; i >= 0; i--) {
+      Coin c = coins.get(i);
+      c.display();
+      if (c.intersect(edgar)) {
+        score += 10;
+        coins.remove(i);
+        coins.add(new Coin());
+      }
     }
+
+
+    // can edgar move into next location or is it occupied by a wall
+    // edgar intersection with coins is off
+    // no ghosts
+
+
+    for (int i = ghosts.size() - 1; i >= 0; i--) {
+      Ghost g = ghosts.get(i);
+      g.display();
+
+
+      if (g.y > height + g.diam/2) {
+        ghosts.remove(i);
+        ghosts.add(new Ghost());
+        continue;
+      }
+
+
+      if (edgar.intersect(g)) {
+        edgar.health -= 10;
+        ghostsHit++;
+        println("Hit! Health:", edgar.health);
+        ghosts.remove(i);
+        ghosts.add(new Ghost());
+      }
+    }
+  }
+
+
+
+
+//boolean edgarWillHitWall(char key){
+
+// float px = edgar.x;
+// float py = edgar.y;
+// float pw = edgar.w;
+// float ph = edgar.h;
+
+
+// if (key == 'w') py -= 10;
+
+//if (key == 's') py += 10;
+
+// if (key == 'a') px -= 10;
+
+//if (key == 'd') px += 10;
+
+// for (int i = 0; i < walls.size(); i++) {
+//   Wall w = walls.get(i);
+//   boolean intersect = rectsOverlap(px, py, pw, ph, w.x, w.y, w.w, w.h);
+//  if (intersect){
+//    return true;
+//}
+// }
+// return false;
+//}
+
+//boolean inRange(float x1,float x2, float w2){
+// if (x1 >= x2 && x1 <= (x2+w2)) {
+//  return true;
+// }
+// return false;
+//}
+
+//boolean rectsOverlap(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2) {
+//
+// println(x1,y1,h1,w1);
+// println(x2,y2,h2,w2);
+
+//if (inRange(x1, x2, w2)) {
+//  if (inRange(y1, y2, h2)) {
+//  return true;
+//}
+//}
+
+//if (inRange(x2, y1, w1)) {
+//  if (inRange(y2, y1, h1)) {
+//    return true;
+//  }
+//}
+//return false;
+//}
+
+void keyPressed() {
+
+  //if (!edgarWillHitWall(key)){
+
+  if (key == 'w') edgar.y -= 10;
+
+  if (key == 's') edgar.y += 10;
+
+  if (key == 'a') edgar.x -= 10;
+
+  if (key == 'd') edgar.x += 10;
+}
+
+void mousePressed() {
+  if (!play && btnStart.clicked()) {
+    play = true;       // start the game
   }
 }
 
-  void mousePressed() {
-    
-    if (!sparkle.isPlaying()) {
-        sparkle.play();
-    }
-    
-    lasers.add(new Laser(cookie.x, cookie.y));
-    cookie.ammo--;
-    
-  }
 
-  void infoPanel() {
-    rectMode(CENTER);
-    fill(127, 127);
-    rect(width/2, 20, width, 40);
-    fill(255);
-    textSize(20);
-    text("Score:" + score, 20, 36);
-    text("Health:" + cookie.health, 150, 36);
-    text("Level:" +  level, 450, 36);
-    text("Ammo:" + cookie.ammo, 300, 36);
-    //text("candy passed:" + rockspassed, 410, 36);
-  }
 
-  void startScreen() {
-    //start = loadImage("start.png");
-    //imageMode(CENTER);
-    image(start,0,0);
-    if(mousePressed) {
-      play = true;
-    }
-    textSize(100);
-    text("Start" ,300,150);
-    
-  }
 
-  void gameOver() {
-    //ackground (#D8BFD8);
-    //ill(255);
-    //text("Game Over :(", 205, 300);
-    image(gameover,325,325);
-    
-    textSize(80);
-    text("Game Over" ,230,150);
-    textSize(50);
-    text("Level: " + level, 340,200);
-    noLoop();
-  }
+void startScreen() {
+  background(0);
+  imageMode(CENTER);
+  image(start, width/2, height/2);
+
+
+  btnStart.display();
+
+  fill(255);
+  textAlign(CENTER);
+  textSize(40);
+}
+
+void gameOverScreen() {
+  background(0);
+
+  fill(255, 0, 0);
+  textAlign(CENTER);
+  textSize(50);
+  text("GAME OVER", width / 2, height - 100);
+  textSize(30);
+  text("Final Score: " + score, width / 2, height - 50);
+}
+
+void infoPanel() {
+  rectMode(CENTER);
+  fill(127, 127);
+  noStroke();
+  rect(width / 2, height - 25, width, 50);
+
+  fill(255);
+  textSize(18);
+  textAlign(LEFT);
+
+  text("Score: " + score, 20, height - 10);
+  text("Ghosts Hit: " + ghostsHit, 200, height - 10);
+
+
+  text("Health: " + edgar.health, 420, height - 10);
+  text("Ammo: " + edgar.spearCount, 620, height - 10);
+}
+
