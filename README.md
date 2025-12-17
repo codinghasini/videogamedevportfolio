@@ -1,5 +1,8 @@
 # Kirubashini Senthilnathan's Game Dev Portfolio 2026
 
+## Certification:
+![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/photo.png)
+
 ## Projects for Term 1
 
 ### Candyland Game 10/22/25 (created new theme to be a candyland theme instead of a space theme)
