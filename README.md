@@ -2,6 +2,14 @@
 
 # Kirubashini Senthilnathan's Game Dev Portfolio 2026
 
+- mailto: kirubashinilps@gmail.com
+- certification in Computer Programming 1
+- certification is Computer Programming 2 (java)
+
+
+
+
+
 ## Certification:
 
 
