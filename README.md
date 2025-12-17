@@ -27,3 +27,6 @@ You can collect power-ups like ammo boost or a health boosts to help you survive
 ## Projects for Term 2
 
 ### Echoes of the Maze ( group project)
+
+#### In this game you will wander through dark corridors collecting spooky coins. The goal is to grab as many coins as possible and find the exit, but the maze is filled with creepy obstacles that can appear out of nowhere. It’s easy to play but hard to shake the feeling that something might be following you.
+
