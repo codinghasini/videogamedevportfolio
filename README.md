@@ -22,3 +22,8 @@ You can collect power-ups like ammo boost or a health boosts to help you survive
 
   
 * [Source Code] (https://github.com/codinghasini/videogamedevportfolio/tree/main/src/SpaceGame)
+
+
+## Projects for Term 2
+
+### Echoes of the Maze ( group project)
