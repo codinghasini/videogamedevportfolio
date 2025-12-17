@@ -1,7 +1,7 @@
 # Kirubashini Senthilnathan's Game Dev Portfolio 2026
 
 ## Certification:
-![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/photo.png)
+![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/Kirubashini%20Senthilnathan_Game%20Development%20Fundamentals%201_12152025.pdf)
 
 ## Projects for Term 1
 
