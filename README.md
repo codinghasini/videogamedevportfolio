@@ -33,8 +33,8 @@ You can collect power-ups like ammo boost or a health boosts to help you survive
 Link to Group Game: https://github.com/codinghasini/GameDev-Group
 
 ![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/Startscreen.png)
-![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/photo.png)
-![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/photo.png)
-![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/photo.png)
+![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/endScreen.png)
+![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/menu.png)
+![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/maze.png)
 
 
