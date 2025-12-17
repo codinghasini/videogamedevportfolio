@@ -5,7 +5,7 @@
 ## Certification:
 
 
-![Image](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/Kirubashini%20Senthilnathan_Game%20Development%20Fundamentals%201_12152025.pdf)
+![Image]([https://github.com/codinghasini/videogamedevportfolio/blob/main/images/Kirubashini%20Senthilnathan_Game%20Development%20Fundamentals%201_12152025.pdf](https://github.com/codinghasini/videogamedevportfolio/blob/main/images/certification.png))
 
 
 
